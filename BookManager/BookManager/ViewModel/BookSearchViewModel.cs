@@ -133,7 +133,18 @@ namespace BookManager.ViewModel
 
         private void OnMove()
         {
-            MessageBox.Show("Nie zaimplementowane!");
+            var temp = FolderListViewModel._selectedLocation;
+            var temp2 = SelectedItem.FileName;
+            var temp3 = Path.Combine(temp, Path.GetFileName(SelectedItem.ShortFileName));
+            File.Move(temp2, temp3);
+            File.Delete(temp2);
+            Files.Remove(SelectedItem);
+            FolderListViewModel._selectedLocationItems.Add(new DirectoryItem()
+            {
+                EditMode = false,
+                Name = temp3,
+                Type = DirectoryItemType.File
+            });
         }
 
         private void OnCancelSearch()

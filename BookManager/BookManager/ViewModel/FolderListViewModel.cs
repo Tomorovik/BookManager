@@ -137,7 +137,19 @@ namespace BookManager.ViewModel
 
         private void OnRenameItem()
         {
-            MessageBox.Show("Potrzeba zaimplementowac");
+            View.CustomView.InputDialog id = new View.CustomView.InputDialog();
+            if (id.ShowDialog() == true)
+            {
+                if (id.DialogResult == true)
+                {
+                    var temp = Path.Combine(SelectedLocation, id.Input);
+                    if (Type == DirectoryItemType.File)
+                        File.Move(SelectedItem.Name, temp);
+                    else
+                        Directory.Move(SelectedItem.Name, temp);
+                    GetDirectoriesAndFiles(ref _selectedLocationItems, SelectedLocation);
+                }
+            }
         }
 
         private void OnDeleteFolder()
