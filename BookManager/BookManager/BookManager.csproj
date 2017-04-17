@@ -77,10 +77,14 @@
     <Compile Include="Utility\FileSearch.cs" />
     <Compile Include="Utility\RelayCommand.cs" />
     <Compile Include="ViewModel\BookSearchViewModel.cs" />
+    <Compile Include="ViewModel\FolderListViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\BookSearchView.xaml.cs">
       <DependentUpon>BookSearchView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FolderListView.xaml.cs">
+      <DependentUpon>FolderListView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -95,6 +99,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\BookSearchView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FolderListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

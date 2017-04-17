@@ -172,6 +172,10 @@
                 </Button.ContentTemplate>
             </Button>
         </Grid>
-        <ListView Grid.Row="3" Grid.Column="2"></ListView>
+        <UserControl Grid.Row="3" Grid.Column="2" Margin="2 2 2 2" >
+            <Border BorderThickness="1">
+                <local:FolderListView></local:FolderListView>
+            </Border>
+        </UserControl>
     </Grid>
 </UserControl>
