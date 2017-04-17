@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Forms;
 using BookManager.Model;
 using BookManager.Utility;
+using GalaSoft.MvvmLight.Command;
 using MessageBox = System.Windows.MessageBox;
 
 namespace BookManager.ViewModel

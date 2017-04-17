@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
+using GalaSoft.MvvmLight.Command;
 
 namespace BookManager.ViewModel
 {
