@@ -44,6 +44,7 @@ namespace BookManager.ViewModel
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<BookSearchViewModel>();
+            SimpleIoc.Default.Register<FolderListViewModel>();
 
         }
 
@@ -58,6 +59,10 @@ namespace BookManager.ViewModel
         public BookSearchViewModel BookSearch
         {
             get { return ServiceLocator.Current.GetInstance<BookSearchViewModel>(); }
+        }
+        public FolderListViewModel Folder
+        {
+            get { return ServiceLocator.Current.GetInstance<FolderListViewModel>(); }
         }
 
         public static void Cleanup()
