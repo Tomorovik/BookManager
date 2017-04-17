@@ -43,6 +43,8 @@ namespace BookManager.ViewModel
             ////}
 
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<BookSearchViewModel>();
+
         }
 
         public MainViewModel Main
@@ -52,7 +54,12 @@ namespace BookManager.ViewModel
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
-        
+
+        public BookSearchViewModel BookSearch
+        {
+            get { return ServiceLocator.Current.GetInstance<BookSearchViewModel>(); }
+        }
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
