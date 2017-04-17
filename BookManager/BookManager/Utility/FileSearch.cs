@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Windows;
+using BookManager.ViewModel;
 
 namespace BookManager.Utility
 {
@@ -26,6 +27,7 @@ namespace BookManager.Utility
                         if (skipBin && foldersToSkip.Contains(Path.GetFileName(dir)))
                             continue;
                         pdfFiles.AddRange(await GetPdfFiles(dir, pattern));
+                        if (BookSearchViewModel.StopSearch) return;
                     }
                     var files = Directory.GetFiles(Path.Combine(@"\?\", path), pattern, SearchOption.TopDirectoryOnly).AsParallel();
                     foreach (var file in files)
@@ -37,6 +39,7 @@ namespace BookManager.Utility
                                 FileName = file,
                                 Hash = GetHash(file)
                             });
+                        if (BookSearchViewModel.StopSearch) return;
                     }
 
                 }
