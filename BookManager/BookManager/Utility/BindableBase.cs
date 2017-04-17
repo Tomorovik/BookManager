@@ -1,9 +1,6 @@
-﻿
-
+﻿using BookManager.Annotations;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows;
-using BookManager.Annotations;
 
 namespace BookManager.Utility
 {
@@ -23,6 +20,5 @@ namespace BookManager.Utility
             member = val;
             PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
-
     }
 }
