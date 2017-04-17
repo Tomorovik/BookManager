@@ -4,9 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BookManager"
+        xmlns:view="clr-namespace:BookManager.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" MinHeight="500" MinWidth="1000">
     <Grid>
-        
+        <ContentControl>
+            <view:BookSearchView Margin="10"></view:BookSearchView>
+        </ContentControl>
     </Grid>
 </Window>

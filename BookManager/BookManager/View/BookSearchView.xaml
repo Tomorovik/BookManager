@@ -17,9 +17,11 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0" Margin="2">
-            <Label Content="Wybierz lokalizacje" FontSize="20" VerticalAlignment="Center"/>
-            <Button Name="SelectFolder" Content="Wybierz folder" >
+        <StackPanel Orientation="Horizontal" Margin="2"
+                    Grid.Column="0" Grid.Row="0">
+            <Label Content="Wybierz lokalizacje"
+                   FontSize="20" VerticalAlignment="Center"/>
+            <Button Content="Wybierz folder" Command="{Binding SelectCommand}">
                 <Button.Background>
                     <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
                 </Button.Background>
@@ -28,11 +30,13 @@
         <StackPanel  Grid.Column="0" Grid.Row="1" Margin="2">
             <StackPanel Orientation="Horizontal" Name="StackPanel">
                 <Label Content="Lokalizacja"  FontSize="20" VerticalAlignment="Center"/>
-                <TextBlock Margin="5 0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Stretch" Foreground="#FFDADADA" ></TextBlock>
+                <TextBlock Text="{Binding SelectedLocation}" Margin="5 0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Stretch" Foreground="#FFDADADA" ></TextBlock>
             </StackPanel>
-            <ListView Name="SelectedDrive"
+            <ListView 
                   MinHeight="100"
-                  SelectionMode="Single"/>
+                  ItemsSource="{Binding Drives}" SelectedItem="{Binding SelectedLocation}"
+                  SelectionMode="Single"
+                  IsEnabled="{Binding CanSearch}"/>
         </StackPanel>
         <Grid Grid.Row="1" Grid.Column="2" Margin="2">
             <Grid.ColumnDefinitions>
@@ -48,44 +52,82 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Label Grid.Column="0" Grid.Row="0" Content="Typ plików:"></Label>
-            <ComboBox Grid.Row="0" Grid.Column="1"></ComboBox>
+            <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding ExtensionTypes}" SelectedItem="{Binding SelectedExtension}"></ComboBox>
             <Label Grid.Column="0" Grid.Row="1" Content="Nazwa pliku:"></Label>
             <TextBox Grid.Row="1" Grid.Column="1" MinWidth="100"></TextBox>
             <Label Grid.Column="0" Grid.Row="2" Content="Szukaj duplikatów:"></Label>
-            <CheckBox Grid.Row="2" Grid.Column="1" MinWidth="100" VerticalAlignment="Center" ></CheckBox>
+            <CheckBox Grid.Row="2" Grid.Column="1" MinWidth="100" VerticalAlignment="Center" IsChecked="{Binding SearchForDuplicates}"></CheckBox>
             <Label Grid.Column="0" Grid.Row="3" Content="Usuwanie duplikatów:"></Label>
-            <CheckBox Grid.Row="3" Grid.Column="1" MinWidth="100" VerticalAlignment="Center"></CheckBox>
+            <CheckBox Grid.Row="3" Grid.Column="1" MinWidth="100" VerticalAlignment="Center" IsChecked="{Binding DeleteDuplicates}"></CheckBox>
             <Label Grid.Column="0" Grid.Row="4" Content="Pomiń kosz:"></Label>
-            <CheckBox Grid.Row="4" Grid.Column="1" MinWidth="100" VerticalAlignment="Center"></CheckBox>
+            <CheckBox Grid.Row="4" Grid.Column="1" MinWidth="100" VerticalAlignment="Center" IsChecked="{Binding SkipBin}"></CheckBox>
         </Grid>
-        <Button Grid.Row="0" Grid.Column="2" Content="Ustaw lokalizację biblioteki" HorizontalAlignment="Right" Margin="2"/>
-        <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
-            <Button Content="Wyszukaj" HorizontalContentAlignment="Left"/>
-            <Button Content="Anuluj Wyszukiwanie" HorizontalContentAlignment="Left" />
-            <ProgressBar IsIndeterminate="True"/>
+        <Button Grid.Row="0" Grid.Column="2" Command="{Binding SettingsCommand}" HorizontalAlignment="Right" Margin="2">
+            <Button.ContentTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Ustaw lokalizację biblioteki" FontFamily="Segoe UI Symbol" />
+                    </StackPanel>
+                </DataTemplate>
+            </Button.ContentTemplate>
+        </Button>
+        <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Margin="2">
+            <Button Name="Search" Visibility="{Binding IsVisible}"
+                IsEnabled="{Binding CanSearch}"
+                Command="{Binding SearchCommand}"
+                HorizontalContentAlignment="Left" FontWeight="Bold">
+                <Button.Background>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
+                </Button.Background>
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Wyszukaj" FontFamily="Segoe UI Symbol" />
+                        </StackPanel>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+            <Button Name="Cancel" Visibility="{Binding CanCancel}"
+                Command="{Binding CancelSearchCommand}"
+                HorizontalContentAlignment="Left" FontWeight="Bold">
+                <Button.Background>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
+                </Button.Background>
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Anuluj Wyszukiwanie" FontFamily="Segoe UI Symbol" />
+                        </StackPanel>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+            <ProgressBar Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="0" IsIndeterminate="True" Visibility="{Binding CanCancel}"></ProgressBar>
         </StackPanel>
-        <Border Grid.Row="3" Grid.Column="0" BorderThickness="1">
-            <DataGrid Visibility="Visible"
-                      AutoGenerateColumns="False" VerticalScrollBarVisibility="Visible" 
+        <Border Grid.Row="3" Grid.Column="0" BorderThickness="1" Margin="2">
+            <DataGrid Name="FoundPdfs" Grid.Column="0" Visibility="Visible" 
+                      AutoGenerateColumns="False" VerticalScrollBarVisibility="Visible"
                       IsManipulationEnabled="False"
                       IsReadOnly="True"
-                      SelectionMode="Single">
+                      ItemsSource="{Binding Files}" 
+                      SelectedItem="{Binding SelectedItem}"
+                      SelectionMode="Single"
+                  >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="FileName" Width="*" >
+                    <DataGridTextColumn Binding="{Binding ShortFileName }" Header="FileName" Width="*" >
                         <DataGridTextColumn.ElementStyle>
                             <Style>
                                 <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="FileLocation" Width="*">
+                    <DataGridTextColumn Binding="{Binding FileLocation }" Header="FileLocation" Width="*">
                         <DataGridTextColumn.ElementStyle>
                             <Style>
                                 <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Hash" Width="*">
+                    <DataGridTextColumn Binding="{Binding PublicHash }" Header="Hash" Width="*">
                         <DataGridTextColumn.ElementStyle>
                             <Style>
                                 <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
@@ -103,9 +145,32 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Button Grid.Row="1" Content="Przenieś" ToolTip="Przenies plik do folderu" />
-                <Button Grid.Row="2" Visibility="Hidden"/>
-            <Button Grid.Row="3" ToolTip="Usun duplikaty zaznaczonego pliku" ToolTipService.ShowOnDisabled="True" Content="Usuń "/>
+            <Button Grid.Row="1" Command="{Binding MoveCommand}" ToolTip="Przenies plik do folderu" >
+                <Button.Background>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
+                </Button.Background>
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Przenies"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+            <Button Grid.Row="2" Visibility="Hidden">
+            </Button>
+            <Button Grid.Row="3" Command="{Binding DeleteDuplicatesCommand}" IsEnabled="{Binding DeleteDuplicates }" ToolTip="Usun duplikaty zaznaczonego pliku" ToolTipService.ShowOnDisabled="True">
+                <Button.Background>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
+                </Button.Background>
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Usun duplikaty"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
         </Grid>
         <ListView Grid.Row="3" Grid.Column="2"></ListView>
     </Grid>
