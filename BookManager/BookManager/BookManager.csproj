@@ -89,6 +89,9 @@
     <Compile Include="View\BookSearchView.xaml.cs">
       <DependentUpon>BookSearchView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\CustomView\InputDialog.xaml.cs">
+      <DependentUpon>InputDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\FolderListView.xaml.cs">
       <DependentUpon>FolderListView.xaml</DependentUpon>
     </Compile>
@@ -105,6 +108,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\BookSearchView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CustomView\InputDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
