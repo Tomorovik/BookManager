@@ -4,7 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BookManager.View"
-             mc:Ignorable="d" >
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}">
     <Grid MinWidth="800" MinHeight="400">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -152,12 +155,13 @@
                 <Button.ContentTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Przenies"></TextBlock>
+                            <materialDesign:PackIcon Kind="ChevronRight"/>
                         </StackPanel>
                     </DataTemplate>
                 </Button.ContentTemplate>
             </Button>
             <Button Grid.Row="2" Visibility="Hidden">
+                <materialDesign:PackIcon Kind="RenameBox"/>
             </Button>
             <Button Grid.Row="3" Command="{Binding DeleteDuplicatesCommand}" IsEnabled="{Binding DeleteDuplicates }" ToolTip="Usun duplikaty zaznaczonego pliku" ToolTipService.ShowOnDisabled="True">
                 <Button.Background>
@@ -166,7 +170,7 @@
                 <Button.ContentTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Usun duplikaty"></TextBlock>
+                            <materialDesign:PackIcon Kind="Delete"/>
                         </StackPanel>
                     </DataTemplate>
                 </Button.ContentTemplate>

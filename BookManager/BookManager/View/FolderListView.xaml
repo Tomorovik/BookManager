@@ -7,8 +7,11 @@
              xmlns:local="clr-namespace:BookManager.View"
              xmlns:command="http://www.galasoft.ch/mvvmlight"
              xmlns:model="clr-namespace:BookManager.Model"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -25,62 +28,69 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <ComboBox Name="DrivesList" 
+                      Padding="5"
                       ItemsSource="{Binding DrivesList}" 
                       SelectedItem="{Binding SelectedDrive, Mode=TwoWay}" 
                       Grid.Column="0" Height="40" 
                       Foreground="Black"
                       VerticalAlignment="Center" VerticalContentAlignment="Center" />
-            <Button Grid.Column="1" Width="30" IsEnabled="{Binding CanGoUp}" Command="{Binding MoveUpCommand }">
+            <Button Grid.Column="1"  IsEnabled="{Binding CanGoUp}" Command="{Binding MoveUpCommand }">
                 <Button.Background>
                     <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
                 </Button.Background>
                 <Button.ContentTemplate>
                     <DataTemplate>
+                        <materialDesign:PackIcon Kind="ArrowUp"/>
                     </DataTemplate>
                 </Button.ContentTemplate>
             </Button>
-            <Button Grid.Column="2" Width="30" Command="{Binding NewFolderCommand}">
+            <Button Grid.Column="2" Command="{Binding NewFolderCommand}">
                 <Button.Background>
                     <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
                 </Button.Background>
                 <Button.ContentTemplate>
                     <DataTemplate>
+                        <materialDesign:PackIcon Kind="FolderPlus"/>
                     </DataTemplate>
                 </Button.ContentTemplate>
             </Button>
-            <Button Grid.Column="3"  Width="30" Command="{Binding DesktopCommand}">
+            <Button Grid.Column="3" Command="{Binding DesktopCommand}">
                 <Button.Background>
                     <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
                 </Button.Background>
                 <Button.ContentTemplate>
                     <DataTemplate>
+                        <materialDesign:PackIcon Kind="Monitor"/>
                     </DataTemplate>
                 </Button.ContentTemplate>
             </Button>
-            <Button Grid.Column="4" Width="30"  Command="{Binding FavoriteCommand}">
+            <Button Grid.Column="4" Command="{Binding FavoriteCommand}">
                 <Button.Background>
                     <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
                 </Button.Background>
                 <Button.ContentTemplate>
                     <DataTemplate>
+                        <materialDesign:PackIcon Kind="Wan"/>
                     </DataTemplate>
                 </Button.ContentTemplate>
             </Button>
-            <Button Grid.Column="5" Width="30" Command="{Binding RenameItemCommand}">
+            <Button Grid.Column="5"  Command="{Binding RenameItemCommand}">
                 <Button.Background>
                     <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
                 </Button.Background>
                 <Button.ContentTemplate>
                     <DataTemplate>
+                        <materialDesign:PackIcon Kind="RenameBox"/>
                     </DataTemplate>
                 </Button.ContentTemplate>
             </Button>
-            <Button Grid.Column="6"  Width="30"  Command="{Binding DeleteFolderCommand}">
+            <Button Grid.Column="6" Command="{Binding DeleteFolderCommand}">
                 <Button.Background>
                     <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuHighlightColorKey}}"/>
                 </Button.Background>
                 <Button.ContentTemplate>
                     <DataTemplate>
+                        <materialDesign:PackIcon Kind="FolderRemove"/>
                     </DataTemplate>
                 </Button.ContentTemplate>
             </Button>
