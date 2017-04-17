@@ -35,4 +35,4 @@ namespace BookManager.View.CustomView
         }
     }
 }
-}
+

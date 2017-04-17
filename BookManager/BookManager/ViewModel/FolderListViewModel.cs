@@ -103,8 +103,8 @@ namespace BookManager.ViewModel
             DrivesList = new ObservableCollection<string>() { "Biblioteka książek" };
             DrivesList = new ObservableCollection<string>(DrivesList.Union(GetAllDrives()));
             SelectedLocationItems = new ObservableCollection<DirectoryItem>();
-            SelectedLocation = DrivesList[2];
-            SelectedDrive = DrivesList[2];
+            SelectedLocation = DrivesList[1];
+            SelectedDrive = DrivesList[1];
             MoveUpCommand = new RelayCommand(OnMoveUp);
             NewFolderCommand = new RelayCommand(OnNewFolder);
             DesktopCommand = new RelayCommand(OnDesktop);
