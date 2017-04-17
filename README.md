@@ -1,6 +1,6 @@
 # BookManager
 
-Application created for own use, to make it easier to organize my e-book collection and get grasp on MVVM pattern. 
+Application created for own use, to make it easier to organize my e-book collection and get grasp on MVVM pattern using MVVM Light. I've used also MaterialDesignThemes Nuget to make the UI little bit prettier.
 
 * Working things:
     - Listing drives
