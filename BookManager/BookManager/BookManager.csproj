@@ -70,6 +70,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\DirectoryItem.cs" />
+    <Compile Include="Model\DirectoryItemType.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Utility\BindableBase.cs" />
     <Compile Include="Utility\FileSearch.cs" />
